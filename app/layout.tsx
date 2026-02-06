@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Script from "next/script";
+import KakaoScript from "@/components/KakaoScript";
 
 // Local Font: Laundry Gothic
 const laundryGothic = localFont({
@@ -32,14 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${laundryGothic.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased min-h-screen bg-gradient-to-br from-rose-50 via-white to-pink-50">
         {children}
-        <Script
-          src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"
-          integrity="sha384-TiCUE00h649CAMonG018J2ujOgDKW/kVWlChEuu4jK2txfDWp1Ps941/+NC7Ubt+"
-          crossOrigin="anonymous"
-          strategy="lazyOnload"
-        />
+        <KakaoScript />
       </body>
     </html>
   );
