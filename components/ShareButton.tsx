@@ -65,9 +65,9 @@ export default function ShareButton({ sender, title }: ShareButtonProps) {
 
   const handleNativeShare = async () => {
     const currentUrl = window.location.origin + `/invite?sender=${encodeURIComponent(sender)}&title=${encodeURIComponent(title)}`;
-    if (navigator.share) {
+    if (typeof navigator !== "undefined" && (navigator as any).share) {
       try {
-        await navigator.share({
+        await (navigator as any).share({
           title: `${sender}님의 데이트 신청`,
           text: `"${title}" - 거절할 수 없는 제안이 도착했습니다.`,
           url: currentUrl,

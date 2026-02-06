@@ -19,7 +19,7 @@ function InviteContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="card-clean w-full max-w-lg p-10 md:p-14 relative overflow-hidden"
+            className="card-clean w-full max-w-lg px-6 py-10 md:p-14 relative overflow-hidden"
             style={{ minHeight: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
         >
             {!isAccepted ? (
