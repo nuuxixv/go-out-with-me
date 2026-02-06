@@ -11,7 +11,7 @@ declare global {
 export default function KakaoScript() {
     const onLoad = () => {
         if (window.Kakao && !window.Kakao.isInitialized()) {
-            const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
+            const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_JS_KEY;
             if (kakaoKey) {
                 window.Kakao.init(kakaoKey);
                 console.log("Kakao SDK Initialized");
