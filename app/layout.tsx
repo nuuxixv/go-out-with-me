@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-import { Jua, Noto_Sans_KR } from "next/font/google"; // Using Google Fonts
+import localFont from "next/font/local";
 import "./globals.css";
 import Script from "next/script";
 
-const jua = Jua({ 
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-jua",
-});
-
-const notoSansKr = Noto_Sans_KR({
-  subsets: ["latin"],
-  variable: "--font-noto",
+// Local Font: Laundry Gothic
+const laundryGothic = localFont({
+  src: [
+    {
+      path: "./fonts/LaundryGothic-Regular.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/LaundryGothic-Bold.woff",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-laundry",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${jua.variable} ${notoSansKr.variable} font-sans antialiased text-gray-900`}>
+      <body className={`${laundryGothic.variable} font-sans antialiased`}>
         {children}
         <Script
           src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.2/kakao.min.js"

@@ -8,83 +8,75 @@ import { motion } from "framer-motion";
 
 function InviteContent() {
   const searchParams = useSearchParams();
-  const sender = searchParams.get("sender") || "Unknown";
-  const title = searchParams.get("title") || "Something exciting";
+  const sender = searchParams.get("sender") || "익명";
+  const title = searchParams.get("title") || "데이트 신청";
   
   const [isAccepted, setIsAccepted] = useState(false);
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-hidden">
-        {/* Background Ambient */}
-        <div className="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-[#4C1D95] rounded-full blur-[120px] opacity-40" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-[#CCFF00] rounded-full blur-[120px] opacity-20" />
-
+    <main className="min-h-screen flex flex-col items-center justify-center p-6 bg-[#f2f4f6]">
         <motion.div 
-            initial={{ rotateX: 90, opacity: 0 }}
-            animate={{ rotateX: 0, opacity: 1 }}
-            transition={{ type: "spring", damping: 20, stiffness: 100 }}
-            className="glass-panel w-full max-w-lg rounded-[2.5rem] p-8 md:p-12 relative z-10 text-center border-t border-white/40 shadow-2xl"
-            style={{ transformStyle: "preserve-3d" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="card-clean w-full max-w-lg p-8 md:p-12 relative overflow-hidden"
+            style={{ minHeight: '400px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
         >
             {!isAccepted ? (
                 <>
-                    <div className="inline-block px-4 py-1 rounded-full border border-[#CCFF00] text-[#CCFF00] text-xs font-bold tracking-widest uppercase mb-6">
-                        Incoming Request
-                    </div>
+                   <div className="flex justify-center mb-6">
+                        <span className="bg-[#e8f3ff] text-[#3182f6] px-3 py-1 rounded-full text-sm font-bold">
+                            New Request
+                        </span>
+                   </div>
 
-                    <h1 className="text-massive font-jua text-white mb-8 leading-[1.1] text-start">
-                        <span className="text-4xl md:text-5xl opacity-80 block mb-2">{sender}</span>
-                        <span className="block text-[#CCFF00]">같이</span>
-                        <span className="block">하자!</span>
+                    <h1 className="text-3xl md:text-4xl font-bold text-[#191f28] mb-8 leading-tight text-center">
+                        <span className="text-[#3182f6]">{sender}</span>님이<br/>
+                        데이트를 신청했어요
                     </h1>
 
-                    <div className="bg-black/30 p-6 rounded-2xl mb-10 text-left border-l-4 border-[#CCFF00]">
-                        <p className="text-white/60 text-sm font-bold uppercase mb-1">Mission</p>
-                        <p className="text-2xl font-bold text-white break-keep leading-snug">
-                            "{title}"
+                    <div className="bg-[#f2f4f6] p-6 rounded-2xl mb-10 text-center">
+                        <p className="text-[#4e5968] text-sm font-bold mb-2">신청 내용</p>
+                        <p className="text-xl font-bold text-[#191f28] break-keep">
+                            {title}
                         </p>
                     </div>
 
-                    <div className="flex flex-col gap-4 relative min-h-[160px]">
-                        <motion.button
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
+                    <div className="flex flex-col gap-3 w-full relative" style={{ minHeight: '140px' }}>
+                        <button
                             onClick={() => setIsAccepted(true)}
-                            className="w-full py-5 bg-[#FF00BF] text-white font-jua text-2xl rounded-2xl shadow-[0_10px_30px_rgba(255,0,191,0.4)] hover:bg-[#ff33cc] transition-all z-20 flex items-center justify-center gap-2"
+                            className="btn-primary"
                         >
-                            <span>콜! (수락)</span>
-                            <span className="text-xl">🔥</span>
-                        </motion.button>
+                            좋아!
+                        </button>
                         
-                        <div className="relative h-16 w-full flex justify-center">
-                            <RunawayButton label="싫어 (거절)" />
+                        {/* Runaway Button Container */}
+                        <div className="relative h-14 w-full flex justify-center">
+                            <RunawayButton label="싫어" />
                         </div>
                     </div>
                 </>
             ) : (
-                <motion.div 
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    className="py-10"
-                >
+                <div className="flex flex-col items-center text-center py-6">
                     <motion.div 
-                        animate={{ rotate: [0, 10, -10, 0] }}
-                        transition={{ duration: 0.5, repeat: Infinity, repeatDelay: 2 }}
-                        className="text-8xl mb-6"
+                        initial={{ scale: 0.5, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                        className="text-7xl mb-6"
                     >
-                        😎
+                        🎉
                     </motion.div>
                     
-                    <h2 className="text-4xl font-jua text-white mb-4">
-                        <span className="text-[#CCFF00]">약속</span> 잡혔다!
+                    <h2 className="text-3xl font-bold text-[#191f28] mb-4">
+                        약속 성사!
                     </h2>
                     
-                    <p className="text-white/70 mb-8 leading-relaxed">
-                        이제 도망 못 감.<br/>
-                        <b>{sender}</b>님한테 빨리 자랑해!
+                    <p className="text-[#4e5968] mb-8 text-lg">
+                        두 분의 데이트를 응원할게요.<br/>
+                        <span className="text-sm text-[#8b95a1] mt-2 block">화면을 캡쳐해서 공유해보세요</span>
                     </p>
 
-                    <div className="bg-[#FEE500] text-black font-bold p-1 rounded-xl">
+                    <div className="w-full">
                         <button
                             onClick={() => {
                                 if (typeof window === "undefined" || !(window as any).Kakao) return;
@@ -94,23 +86,22 @@ function InviteContent() {
                                 Kakao.Share.sendDefault({
                                     objectType: 'feed',
                                     content: {
-                                    title: `😎 ${sender}님의 신청 수락 완료!`,
-                                    description: `준비 단단히 해라.`,
+                                    title: `🎉 ${sender}님의 신청 수락!`,
+                                    description: `데이트 성사 완료. 준비하시죠!`,
                                     imageUrl: 'https://cdn.pixabay.com/photo/2016/11/29/09/32/concept-1868728_1280.jpg',
                                     link: { mobileWebUrl: currentUrl, webUrl: currentUrl },
                                     },
-                                    buttons: [{ title: '뭐라고 했더라?', link: { mobileWebUrl: currentUrl, webUrl: currentUrl } }],
+                                    buttons: [{ title: '확인하기', link: { mobileWebUrl: currentUrl, webUrl: currentUrl } }],
                                 });
                             }}
-                            className="w-full py-4 text-center text-lg flex items-center justify-center gap-2 hover:bg-white/50 rounded-lg transition-colors"
+                            className="w-full py-4 bg-[#FEE500] text-[#191919] rounded-2xl font-bold hover:bg-[#FDD835] transition-colors"
                         >
-                            <span>카톡으로 자랑하기</span>
+                            카카오톡으로 자랑하기
                         </button>
                     </div>
-                    
-                    <Confetti />
-                </motion.div>
+                </div>
             )}
+             <Confetti />
         </motion.div>
     </main>
   );
@@ -118,7 +109,7 @@ function InviteContent() {
 
 export default function InvitePage() {
   return (
-    <Suspense fallback={<div className="text-white flex items-center justify-center h-screen bg-black">LOADING...</div>}>
+    <Suspense fallback={<div className="flex items-center justify-center h-screen bg-[#f2f4f6] text-[#8b95a1]">로딩중...</div>}>
       <InviteContent />
     </Suspense>
   );
