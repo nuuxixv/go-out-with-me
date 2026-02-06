@@ -4,10 +4,10 @@ import Script from "next/script";
 
 export default function KakaoScript() {
     const onLoad = () => {
-        if (window.Kakao && !window.Kakao.isInitialized()) {
+        if ((window as any).Kakao && !(window as any).Kakao.isInitialized()) {
             const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY;
             if (kakaoKey) {
-                window.Kakao.init(kakaoKey);
+                (window as any).Kakao.init(kakaoKey);
                 console.log("Kakao SDK Initialized");
             }
         }
