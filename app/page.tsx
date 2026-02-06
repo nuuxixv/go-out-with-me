@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Sparkles, Heart, X, RotateCcw, Pencil } from "lucide-react";
 import KakaoShareButton from "@/components/ShareButton";
+import { defaultTheme } from "@/config/theme";
 
 export default function Home() {
   const [recipient, setRecipient] = useState("");
@@ -17,7 +18,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+    <main className={`min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden ${defaultTheme.colors.background}`}>
       {/* Background Branding Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-10 left-10 w-64 h-64 bg-pink-200/20 rounded-full blur-3xl"></div>
@@ -47,7 +48,7 @@ export default function Home() {
                 <span className="text-4xl">💌</span>
               </div>
               <h1 className="text-2xl font-bold text-gray-800 tracking-tight">
-                거절하기 힘든 <span className="text-rose-500">데이트 신청하기</span>
+                거절하기 힘든 <span className={defaultTheme.colors.accent.primary}>데이트 신청하기</span>
               </h1>
             </motion.div>
 
@@ -59,9 +60,9 @@ export default function Home() {
                     placeholder="보검"
                     value={recipient}
                     onChange={(e) => setRecipient(e.target.value)}
-                    className="bg-transparent border-b-2 border-rose-200 text-rose-600 focus:outline-none focus:border-rose-500 transition-colors w-32 text-center placeholder:text-rose-200"
+                    className={`bg-transparent border-b-2 transition-colors w-32 text-center focus:outline-none ${defaultTheme.colors.input.primary.border} ${defaultTheme.colors.input.primary.text} ${defaultTheme.colors.input.primary.focus} ${defaultTheme.colors.input.primary.placeholder}`}
                   />
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-rose-500 scale-x-0 group-focus-within:scale-x-100 transition-transform origin-center"></div>
+                  <div className={`absolute bottom-0 left-0 w-full h-0.5 scale-x-0 group-focus-within:scale-x-100 transition-transform origin-center ${defaultTheme.colors.input.primary.underline}`}></div>
                 </div>
                 <span>님, 저랑</span>
               </div>
@@ -74,10 +75,10 @@ export default function Home() {
                     placeholder="맛집 탐방"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    className="bg-transparent border-b-2 border-pink-200 text-pink-600 focus:outline-none focus:border-pink-500 transition-colors w-48 text-center placeholder:text-pink-200"
+                    className={`bg-transparent border-b-2 transition-colors w-48 text-center focus:outline-none ${defaultTheme.colors.input.secondary.border} ${defaultTheme.colors.input.secondary.text} ${defaultTheme.colors.input.secondary.focus} ${defaultTheme.colors.input.secondary.placeholder}`}
                   />
                   <span>해요!</span>
-                  <div className="absolute bottom-0 left-0 w-full h-0.5 bg-pink-500 scale-x-0 group-focus-within:scale-x-100 transition-transform origin-center"></div>
+                  <div className={`absolute bottom-0 left-0 w-full h-0.5 scale-x-0 group-focus-within:scale-x-100 transition-transform origin-center ${defaultTheme.colors.input.secondary.underline}`}></div>
                 </div>
               </div>
             </div>
@@ -88,7 +89,7 @@ export default function Home() {
                   if (recipient && title) setIsGenerated(true);
                 }}
                 disabled={!recipient || !title}
-                className="btn-gradient w-full text-lg py-4 shadow-pink-200/50 hover:shadow-pink-300/50"
+                className={`btn-gradient w-full text-lg py-4 ${defaultTheme.colors.button.shadow}`}
                 style={{ opacity: recipient && title ? 1 : 0.5 }}
               >
                 신청하기
@@ -134,7 +135,7 @@ export default function Home() {
             <div className="flex gap-4 text-sm text-gray-400">
               <button
                 onClick={() => setIsGenerated(false)}
-                className="hover:text-rose-500 transition-colors flex items-center gap-1"
+                className={`transition-colors flex items-center gap-1 hover:${defaultTheme.colors.accent.primary}`}
               >
                 <Pencil className="w-3 h-3" />
                 수정하기

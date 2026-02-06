@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Heart, X, Sparkles, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { defaultTheme } from "@/config/theme";
 
 
 function InviteContent() {
@@ -11,6 +12,11 @@ function InviteContent() {
     const router = useRouter();
     const recipient = searchParams.get("recipient") || "익명";
     const request = searchParams.get("title") || "데이트";
+
+    // Theme Icons
+    const MainIcon = defaultTheme.icons.MainIcon;
+    const AcceptIcon = defaultTheme.icons.AcceptIcon;
+    const RejectIcon = defaultTheme.icons.RejectIcon;
 
     const [accepted, setAccepted] = useState(false);
     const [noButtonPosition, setNoButtonPosition] = useState({ x: 0, y: 0 });
@@ -135,7 +141,7 @@ function InviteContent() {
                                 transition={{ delay: 0.3, duration: 0.6 }}
                                 className="absolute -top-8 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl p-4 shadow-lg"
                             >
-                                <Sparkles className="w-8 h-8 text-white" strokeWidth={2} />
+                                <MainIcon className="w-8 h-8 text-white" strokeWidth={2} />
                             </motion.div>
 
                             {/* Main Content */}
@@ -146,9 +152,9 @@ function InviteContent() {
                                     transition={{ delay: 0.4, duration: 0.6 }}
                                     className="text-2xl md:text-3xl mb-6 leading-relaxed font-bold text-gray-800"
                                 >
-                                    <span className="text-rose-600">{recipient}</span>님, 저랑
+                                    <span className={defaultTheme.colors.accent.primary}>{recipient}</span>님, 저랑
                                     <br />
-                                    <span className="text-pink-600">{request}</span> 해요!
+                                    <span className={defaultTheme.colors.accent.secondary}>{request}</span> 해요!
                                 </motion.h1>
 
                                 <motion.div
@@ -178,10 +184,10 @@ function InviteContent() {
                                     whileHover={{ scale: 1.02, y: -2 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={handleYes}
-                                    className="btn-gradient w-full max-w-xs gap-3 group z-10"
+                                    className={`btn-gradient w-full max-w-xs gap-3 group z-10 ${defaultTheme.colors.button.shadow}`}
                                 >
                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                                    <Heart className="w-5 h-5 relative z-10" fill="currentColor" />
+                                    <AcceptIcon className="w-5 h-5 relative z-10" fill="currentColor" />
                                     <span className="relative z-10">좋아요</span>
                                 </motion.button>
 
@@ -216,7 +222,7 @@ function InviteContent() {
                                             position: !isButtonAway ? 'relative' : 'absolute',
                                         }}
                                     >
-                                        <X className="w-5 h-5" />
+                                        <RejectIcon className="w-5 h-5" />
                                         <span>싫어요</span>
                                     </motion.button>
                                 </div>
@@ -255,7 +261,7 @@ function InviteContent() {
                             }}
                             className="bg-gradient-to-br from-pink-500 to-rose-500 rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center shadow-lg shadow-pink-200"
                         >
-                            <Heart className="w-12 h-12 text-white" fill="currentColor" strokeWidth={0} />
+                            <AcceptIcon className="w-12 h-12 text-white" fill="currentColor" strokeWidth={0} />
                         </motion.div>
 
                         <motion.h2
