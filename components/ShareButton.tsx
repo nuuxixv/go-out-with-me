@@ -12,14 +12,8 @@ interface ShareButtonProps {
 export default function ShareButton({ sender, title }: ShareButtonProps) {
   useEffect(() => {
     // Initialize Kakao SDK if available
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     if (typeof window !== "undefined" && (window as any).Kakao) {
       if (!(window as any).Kakao.isInitialized()) {
-        // Use a demo key or user's key? 
-        // Plan said user needs to provide key.
-        // We will try to initialize with env var if present, or let user handle it.
-        // For now, we assume script is loaded in layout and initialized there or here.
-        // We'll leave initialization for layout or here with a placeholder.
         const kakaoKey = process.env.NEXT_PUBLIC_KAKAO_API_KEY; 
         if(kakaoKey) {
             (window as any).Kakao.init(kakaoKey);
@@ -30,23 +24,20 @@ export default function ShareButton({ sender, title }: ShareButtonProps) {
 
   const handleShare = () => {
     if (typeof window === "undefined" || !(window as any).Kakao) {
-      alert("카카오톡 SDK가 로드되지 않았습니다.");
+      alert("카카오톡 SDK가 로드되지 않았습니다. (배포 필요)");
       return;
     }
 
     const { Kakao } = window as any;
-    
-    // Construct the URL to the Invite Page
-    // We need the current domain.
     const currentUrl = window.location.origin + `/invite?sender=${encodeURIComponent(sender)}&title=${encodeURIComponent(title)}`;
 
     Kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `${sender}님의 데이트 신청 💌`,
-        description: `"${title}" 함께 하실래요? (거절 불가)`,
+        title: `${sender}님의 플러팅 💘`,
+        description: `"${title}" (거절 버튼 없음)`,
         imageUrl:
-          'https://cdn.pixabay.com/photo/2019/01/29/18/05/burger-3962996_1280.jpg', // Placeholder tasty food or cute image
+          'https://cdn.pixabay.com/photo/2023/08/23/15/40/sugar-cookie-8208759_1280.png',
         link: {
           mobileWebUrl: currentUrl,
           webUrl: currentUrl,
@@ -54,7 +45,7 @@ export default function ShareButton({ sender, title }: ShareButtonProps) {
       },
       buttons: [
         {
-          title: '확인하러 가기',
+          title: '🔥 확인하러 가기',
           link: {
             mobileWebUrl: currentUrl,
             webUrl: currentUrl,
@@ -67,10 +58,10 @@ export default function ShareButton({ sender, title }: ShareButtonProps) {
   return (
     <button
       onClick={handleShare}
-      className="flex items-center gap-2 px-6 py-3 bg-[#FEE500] text-[#3B1E1E] rounded-xl font-bold hover:bg-[#FDD835] transition-colors"
+      className="w-full flex items-center justify-center gap-3 px-6 py-4 bg-[#FEE500] text-[#3B1E1E] rounded-xl font-bold hover:bg-[#FDD835] transition-transform hover:scale-105 active:scale-95 shadow-lg"
     >
-      <Share2 size={20} />
-      카카오톡으로 신청하기
+      <Share2 size={24} />
+      <span className="text-lg">카카오톡으로 던지기</span>
     </button>
   );
 }

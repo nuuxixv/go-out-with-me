@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion } from "framer-motion";
 import ShareButton from "@/components/ShareButton";
 
 export default function Home() {
@@ -9,67 +10,109 @@ export default function Home() {
   const [isGenerated, setIsGenerated] = useState(false);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-6 text-center">
-      <div className="glass p-8 rounded-3xl max-w-md w-full space-y-8 animate-in fade-in zoom-in duration-500">
-        <h1 className="text-4xl font-jua text-white drop-shadow-md">
-          🍪 쿠키 프로젝트
-        </h1>
-        <p className="text-lg font-medium text-white/90">
-          거절할 수 없는 데이트 신청을 보내보세요!
-        </p>
+    <main className="min-h-screen flex flex-col items-center justify-center p-6 relative overflow-hidden">
+      
+      {/* Dynamic Background Elements */}
+      <div className="absolute top-10 left-10 w-32 h-32 bg-[#CCFF00] rounded-full blur-[80px] opacity-40 animate-pulse" />
+      <div className="absolute bottom-10 right-10 w-48 h-48 bg-[#FF00BF] rounded-full blur-[100px] opacity-30" />
 
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="glass-panel p-8 md:p-12 rounded-[2rem] max-w-xl w-full relative z-10 overflow-hidden"
+      >
+        {/* Header */}
         {!isGenerated ? (
-          <div className="space-y-4">
-            <div className="text-left">
-              <label className="block text-sm font-bold text-white mb-1 ml-1">내 이름 (혹은 별명)</label>
-              <input
-                type="text"
-                placeholder="예: 김건우"
-                value={sender}
-                onChange={(e) => setSender(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-white/80 border-0 focus:ring-2 focus:ring-pink-500 outline-none transition-all placeholder:text-gray-400 font-bold text-gray-800"
-              />
-            </div>
+          <>
+            <motion.h1 
+              initial={{ x: -20 }}
+              animate={{ x: 0 }}
+              className="font-jua text-massive mb-2 text-white drop-shadow-lg"
+            >
+              야,
+              <br />
+              <span className="text-[#CCFF00]">나랑</span>
+              <br />
+              놀래?
+            </motion.h1>
             
-            <div className="text-left">
-              <label className="block text-sm font-bold text-white mb-1 ml-1">신청 내용</label>
-              <input
-                type="text"
-                placeholder="예: 이번 주말에 방어회 뿌시기"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-4 py-3 rounded-xl bg-white/80 border-0 focus:ring-2 focus:ring-pink-500 outline-none transition-all placeholder:text-gray-400 font-bold text-gray-800"
-              />
-            </div>
+            <p className="text-white/60 text-lg mb-10 font-medium tracking-wide">
+              거절은 거절한다. 20분 컷 데이트 신청.
+            </p>
 
-            <button
-              onClick={() => {
-                if(sender && title) setIsGenerated(true);
-              }}
-              disabled={!sender || !title}
-              className="w-full py-4 bg-white text-pink-600 font-jua text-xl rounded-xl shadow-lg hover:scale-105 active:scale-95 transition-transform disabled:opacity-50 disabled:hover:scale-100"
-            >
-              플러팅 카드 만들기 💌
-            </button>
-          </div>
+            <div className="space-y-8">
+              <div className="group">
+                <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-widest">From</label>
+                <input
+                  type="text"
+                  placeholder="니 이름"
+                  value={sender}
+                  onChange={(e) => setSender(e.target.value)}
+                  className="input-modern"
+                />
+              </div>
+
+              <div className="group">
+                <label className="block text-xs font-bold text-white/50 mb-2 uppercase tracking-widest">Do What?</label>
+                <input
+                  type="text"
+                  placeholder="ex) 이번 주말에 방어회 털기"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="input-modern"
+                />
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  if(sender && title) setIsGenerated(true);
+                }}
+                disabled={!sender || !title}
+                className="w-full py-5 bg-[#CCFF00] text-black font-black text-2xl rounded-2xl shadow-[0_0_20px_rgba(204,255,0,0.4)] hover:shadow-[0_0_40px_rgba(204,255,0,0.6)] transition-all disabled:opacity-30 disabled:shadow-none mt-8"
+              >
+                TICKET GET 🎟️
+              </motion.button>
+            </div>
+          </>
         ) : (
-          <div className="space-y-6">
-            <div className="bg-white/40 p-6 rounded-2xl">
-              <p className="text-2xl font-jua text-white mb-2">카드 완성!</p>
-              <p className="text-white/90">이제 카톡으로 보내기만 하면 끝!</p>
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex flex-col items-center text-center space-y-8"
+          >
+            <div className="w-24 h-24 bg-white/10 rounded-full flex items-center justify-center text-5xl mb-4 border border-white/20">
+              🍪
             </div>
             
-            <ShareButton sender={sender} title={title} />
+            <h2 className="text-4xl font-jua text-white leading-tight">
+              준비 완료!
+              <br />
+              <span className="text-sm font-sans font-normal text-white/60 mt-2 block">
+                이제 친구한테 던지기만 하면 됨.
+              </span>
+            </h2>
+
+            <div className="w-full bg-[#1a1a1a] p-6 rounded-xl border border-white/10 my-4">
+              <p className="text-[#CCFF00] font-mono text-sm mb-2 opacity-70">PREVIEW</p>
+              <p className="text-white text-lg font-bold">"{title}"</p>
+            </div>
             
-            <button
-              onClick={() => setIsGenerated(false)}
-              className="block w-full py-2 text-white/80 underline text-sm hover:text-white"
-            >
-              다시 만들기
-            </button>
-          </div>
+            <div className="w-full space-y-3">
+              <ShareButton sender={sender} title={title} />
+              
+              <button
+                onClick={() => setIsGenerated(false)}
+                className="w-full py-3 text-white/40 font-bold hover:text-white transition-colors"
+              >
+                ← BACK
+              </button>
+            </div>
+          </motion.div>
         )}
-      </div>
+      </motion.div>
     </main>
   );
 }

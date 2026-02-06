@@ -3,28 +3,88 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 105, 180; /* Hot Pink */
-  --background-end-rgb: 204, 255, 0;    /* Neon Lime */
+  /* Design 2.0 Palette */
+  --color-acid: #ccff00;
+  --color-purple: #4c1d95;
+  --color-pink: #ff00bf;
+  --color-deep: #0f172a;
+  --foreground-rgb: 255, 255, 255;
+  --background-start: #0f172a;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-    135deg,
-    rgb(var(--background-start-rgb)),
-    rgb(var(--background-end-rgb))
-  );
+  background-color: var(--color-deep);
   min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
-/* Moved glass effect to standard CSS class to avoid @apply issues in some setups,
-   or strictly speaking, @apply should work but sometimes fails with opacity modifiers if not configured. 
-   Simplifying to standard CSS for safety. */
-.glass {
-  background-color: rgba(255, 255, 255, 0.3);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+/* Aurora Mesh Gradient Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 50% 50%, rgba(76, 29, 149, 0.4), transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(204, 255, 0, 0.15), transparent 40%),
+    radial-gradient(circle at 20% 80%, rgba(255, 0, 191, 0.3), transparent 40%);
+  filter: blur(80px);
+  animation: aurora 20s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes aurora {
+  0% { transform: rotate(0deg) translate(0, 0) scale(1); }
+  33% { transform: rotate(120deg) translate(50px, -50px) scale(1.1); }
+  66% { transform: rotate(240deg) translate(-50px, 50px) scale(0.9); }
+  100% { transform: rotate(360deg) translate(0, 0) scale(1); }
+}
+
+/* Utilities converted to standard CSS to avoid @apply build errors */
+
+.glass-panel {
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+}
+
+.text-massive {
+  font-size: 3.75rem; /* text-6xl */
+  line-height: 1;
+  font-weight: 900; /* font-black */
+  letter-spacing: -0.05em; /* tracking-tighter */
+}
+
+@media (min-width: 768px) {
+  .text-massive {
+    font-size: 6rem; /* text-8xl */
+  }
+}
+
+.input-modern {
+  width: 100%;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 1rem 0.5rem;
+  font-size: 1.5rem; /* text-2xl */
+  font-weight: 700; /* font-bold */
+  color: white;
+  border-radius: 0;
+  transition: border-color 0.2s;
+}
+
+.input-modern:focus {
+  border-color: #CCFF00;
+  outline: none;
+}
+
+.input-modern::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 400;
 }
