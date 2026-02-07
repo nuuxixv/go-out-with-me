@@ -57,7 +57,7 @@ export default function Home() {
                 <div className="relative group">
                   <input
                     type="text"
-                    placeholder="보검"
+                    placeholder="이름"
                     value={recipient}
                     onChange={(e) => setRecipient(e.target.value)}
                     className="bg-transparent border-b-2 border-sorbet/50 text-sorbet focus:outline-none focus:border-sorbet transition-colors w-32 text-center placeholder:text-sorbet/50"
