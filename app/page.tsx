@@ -71,7 +71,7 @@ export default function Home() {
                 <div className="relative group">
                   <input
                     type="text"
-                    placeholder="토요일에 데이트"
+                    placeholder="주말에 데이트"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
                     className="bg-transparent border-b-2 border-fuchsia/30 text-fuchsia focus:outline-none focus:border-fuchsia transition-colors w-48 text-center placeholder:text-fuchsia/50"
