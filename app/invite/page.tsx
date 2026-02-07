@@ -4,7 +4,6 @@ import { useState, useRef, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Heart, X, Sparkles, Home } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { defaultTheme } from "@/config/theme";
 
 
 function InviteContent() {
@@ -12,11 +11,6 @@ function InviteContent() {
     const router = useRouter();
     const recipient = searchParams.get("recipient") || "익명";
     const request = searchParams.get("title") || "데이트";
-
-    // Theme Icons
-    const MainIcon = defaultTheme.icons.MainIcon;
-    const AcceptIcon = defaultTheme.icons.AcceptIcon;
-    const RejectIcon = defaultTheme.icons.RejectIcon;
 
     const [accepted, setAccepted] = useState(false);
     const [noButtonPosition, setNoButtonPosition] = useState({ x: 0, y: 0 });
@@ -139,9 +133,9 @@ function InviteContent() {
                                 initial={{ rotate: -180, opacity: 0 }}
                                 animate={{ rotate: 0, opacity: 1 }}
                                 transition={{ delay: 0.3, duration: 0.6 }}
-                                className="absolute -top-8 bg-gradient-to-br from-pink-500 to-rose-500 rounded-2xl p-4 shadow-lg"
+                                className="absolute -top-8 bg-gradient-to-br from-fuchsia to-blush rounded-2xl p-4 shadow-lg"
                             >
-                                <MainIcon className="w-8 h-8 text-white" strokeWidth={2} />
+                                <Sparkles className="w-8 h-8 text-white" strokeWidth={2} />
                             </motion.div>
 
                             {/* Main Content */}
@@ -152,16 +146,16 @@ function InviteContent() {
                                     transition={{ delay: 0.4, duration: 0.6 }}
                                     className="text-2xl md:text-3xl mb-6 leading-relaxed font-bold text-gray-800"
                                 >
-                                    <span className={defaultTheme.colors.accent.primary}>{recipient}</span>님, 저랑
+                                    <span className="text-fuchsia">{recipient}</span>님, 저랑
                                     <br />
-                                    <span className={defaultTheme.colors.accent.secondary}>{request}</span> 해요!
+                                    <span className="text-blush">{request}</span> 해요!
                                 </motion.h1>
 
                                 <motion.div
                                     initial={{ scale: 0 }}
                                     animate={{ scale: 1 }}
                                     transition={{ delay: 0.6, type: "spring", stiffness: 200 }}
-                                    className="w-12 h-1 bg-gradient-to-r from-pink-500 to-rose-500 mx-auto rounded-full mb-6"
+                                    className="w-12 h-1 bg-gradient-to-r from-fuchsia to-blush mx-auto rounded-full mb-6"
                                 ></motion.div>
 
                                 <motion.p
@@ -184,10 +178,10 @@ function InviteContent() {
                                     whileHover={{ scale: 1.02, y: -2 }}
                                     whileTap={{ scale: 0.98 }}
                                     onClick={handleYes}
-                                    className={`btn-gradient w-full max-w-xs gap-3 group z-10 ${defaultTheme.colors.button.shadow}`}
+                                    className="btn-gradient w-full max-w-xs gap-3 group z-10"
                                 >
                                     <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
-                                    <AcceptIcon className="w-5 h-5 relative z-10" fill="currentColor" />
+                                    <Heart className="w-5 h-5 relative z-10" fill="currentColor" />
                                     <span className="relative z-10">좋아요</span>
                                 </motion.button>
 
@@ -222,7 +216,7 @@ function InviteContent() {
                                             position: !isButtonAway ? 'relative' : 'absolute',
                                         }}
                                     >
-                                        <RejectIcon className="w-5 h-5" />
+                                        <X className="w-5 h-5" />
                                         <span>싫어요</span>
                                     </motion.button>
                                 </div>
@@ -259,9 +253,9 @@ function InviteContent() {
                                 type: "spring",
                                 stiffness: 200
                             }}
-                            className="bg-gradient-to-br from-pink-500 to-rose-500 rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center shadow-lg shadow-pink-200"
+                            className="bg-gradient-to-br from-fuchsia to-blush rounded-full p-6 w-24 h-24 mx-auto mb-6 flex items-center justify-center shadow-lg shadow-blush/50"
                         >
-                            <AcceptIcon className="w-12 h-12 text-white" fill="currentColor" strokeWidth={0} />
+                            <Heart className="w-12 h-12 text-white" fill="currentColor" strokeWidth={0} />
                         </motion.div>
 
                         <motion.h2
@@ -279,7 +273,7 @@ function InviteContent() {
                             transition={{ delay: 0.5 }}
                             className="text-xl text-gray-600 mb-8 space-y-1"
                         >
-                            <p>즐거운 시간 보내세요</p>
+                            <p>즐거운 시간 보내세요!☺️</p>
                         </motion.div>
 
                         <motion.div
@@ -290,12 +284,18 @@ function InviteContent() {
                         >
                             <button
                                 onClick={() => router.push('/')}
-                                className="btn-ghost-glass w-full flex items-center justify-center gap-2"
+                                className="btn-ghost-glass w-full flex items-center justify-center gap-2 hover:bg-cream/50"
                             >
                                 <Home className="w-4 h-4" />
                                 나도 데이트 신청하기
                             </button>
                         </motion.div>
+
+                        <div className="mt-8 text-center pt-4">
+                            <p className="text-xs text-gray-400 font-medium">made by nuuxixv</p>
+                        </div>
+
+
 
                         {/* Falling Particles */}
                         <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
@@ -322,7 +322,7 @@ function InviteContent() {
                                     className="absolute"
                                     style={{ left: `${Math.random() * 100}%` }}
                                 >
-                                    <div className="w-2 h-2 rounded-full bg-gradient-to-br from-pink-400 to-rose-400"></div>
+                                    <div className="w-2 h-2 rounded-full bg-gradient-to-br from-fuchsia/50 to-sorbet/50"></div>
                                 </motion.div>
                             ))}
                         </div>

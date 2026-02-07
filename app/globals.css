@@ -14,39 +14,45 @@
   font-display: swap;
 }
 
-@theme {
-  --font-sans: "LaundryGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-
 @layer base {
   :root {
-    --background: #ffffff;
+    --background: #FBFCF4;
+    /* Cream */
     --foreground: oklch(0.145 0 0);
     --card: #ffffff;
     --card-foreground: oklch(0.145 0 0);
     --popover: oklch(1 0 0);
     --popover-foreground: oklch(0.145 0 0);
-    --primary: #030213;
-    --primary-foreground: oklch(1 0 0);
-    --secondary: oklch(0.95 0.0058 264.53);
+    --primary: #ED60AC;
+    /* Fuchsia */
+    --primary-foreground: #ffffff;
+    --secondary: #F5ABBC;
+    /* Blush */
     --secondary-foreground: #030213;
     --muted: #ececf0;
     --muted-foreground: #717182;
-    --accent: #e9ebef;
+    --accent: #FCBB77;
+    /* Sorbet */
     --accent-foreground: #030213;
     --destructive: #d4183d;
     --destructive-foreground: #ffffff;
     --border: rgba(0, 0, 0, 0.1);
     --input: transparent;
-    --input-background: #f3f3f5;
-    --ring: oklch(0.708 0 0);
+    --input-background: #ffffff;
+    --ring: #F5ABBC;
     --radius: 0.625rem;
 
+    /* New Palette Variables */
+    --color-cream: #FBFCF4;
+    --color-sorbet: #FCBB77;
+    --color-blush: #F5ABBC;
+    --color-fuchsia: #ED60AC;
+
     /* Custom Gradients */
-    --gradient-primary: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
-    /* Pink-500 to Rose-500 */
-    --gradient-bg: linear-gradient(135deg, #fff1f2 0%, #ffffff 50%, #fdf2f8 100%);
-    /* Rose-50 via White to Pink-50 */
+    --gradient-primary: linear-gradient(135deg, #F5ABBC 0%, #ED60AC 100%);
+    /* Blush to Fuchsia */
+    --gradient-bg: linear-gradient(135deg, #FBFCF4 0%, #FFFFFF 50%, #FBFCF4 100%);
+    /* Cream base */
   }
 
   .dark {
@@ -60,6 +66,14 @@
     --muted-foreground: oklch(0.708 0 0);
     --border: oklch(0.269 0 0);
   }
+}
+
+@theme {
+  --font-sans: "LaundryGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --color-cream: #FBFCF4;
+  --color-sorbet: #FCBB77;
+  --color-blush: #F5ABBC;
+  --color-fuchsia: #ED60AC;
 }
 
 @layer base {
@@ -97,7 +111,7 @@
 
   /* Gradient Button */
   .btn-gradient {
-    background-image: linear-gradient(to right, #ec4899, #f43f5e);
+    background-image: linear-gradient(to right, #F5ABBC, #ED60AC);
     color: white;
     padding: 1rem 2rem;
     border-radius: 1rem;

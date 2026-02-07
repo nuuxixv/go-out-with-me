@@ -36,7 +36,7 @@ export default function ShareButton({ recipient, title }: ShareButtonProps) {
     }
 
     if (!Kakao.Share) {
-      alert("카카오톡 공유 기능을 불러오지 못했습니다. 새로고침 후 다시 시도해주세요.");
+      alert("카카오 SDK가 올바르게 로드되지 않았습니다. (Share 모듈 누락)");
       console.error("Kakao.Share is undefined", Kakao);
       return;
     }
