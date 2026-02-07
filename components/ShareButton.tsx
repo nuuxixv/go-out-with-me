@@ -41,14 +41,29 @@ export default function ShareButton({ recipient, title }: ShareButtonProps) {
       return;
     }
 
+    console.log("Kakao Share Debugging:");
+    console.log("Template ID:", templateId);
+    console.log("Recipient:", recipient);
+    console.log("Title:", title);
+
+    // Construct the path (relative URL)
+    // IMPORTANT: In Kakao Developers, the button link should be set to use the query parameter: ${url}
+    const path = `invite?recipient=${encodeURIComponent(recipient)}&title=${encodeURIComponent(title)}`;
+    console.log("Path sent to template:", path);
+
     Kakao.Share.sendCustom({
       templateId: templateId,
       templateArgs: {
         recipient: recipient,
         title: title,
-        url: `invite?recipient=${encodeURIComponent(recipient)}&title=${encodeURIComponent(title)}`, // Relative path for mobile/web url in template
+        url: path, // Sending as 'url' key. User must ensure template uses ${url}
       },
     });
+
+    // Fallback or other logic removed for now to focus on sendCustom debugging
+    /*
+    Kakao.Share.sendDefault({ ... });
+    */
   };
 
   const handleNativeShare = async () => {
